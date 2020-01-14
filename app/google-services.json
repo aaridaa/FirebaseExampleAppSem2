@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "536709391931",
+    "firebase_url": "https://eventdatabaseahmed4092.firebaseio.com",
+    "project_id": "eventdatabaseahmed4092",
+    "storage_bucket": "eventdatabaseahmed4092.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536709391931:android:40dba62253a4cd4f979e1e",
+        "android_client_info": {
+          "package_name": "com.example.firebaseexampleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536709391931-dlojuna12skrf8ll7jp6g3m4fqq9o3gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLf5ieHD-jyDlThYhk9wrkVWGE8r1ROKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536709391931-dlojuna12skrf8ll7jp6g3m4fqq9o3gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

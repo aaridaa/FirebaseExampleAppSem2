@@ -3,6 +3,7 @@ package com.example.firebaseexampleapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,10 +23,16 @@ public class MainActivity extends AppCompatActivity {
     private int dateDay;
     private int dateYear;
 
+    DecimalFormat df = new DecimalFormat();
+
+    FirebaseDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new FirebaseDatabaseHelper();
 
         //  Video to learn basic access to CalendarView Data
         //  https://www.youtube.com/watch?v=WNBE_3ZizaA
@@ -35,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
                                                  @Override
                                                  public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
+
                                                      dateSelected =  (month + 1) + "/" + day + "/" + year;
                                                      dateYear = year;
                                                      dateMonth = month + 1;
                                                      dateDay = day;
-                                                     Log.i(TAG, "" + dateSelected);
+                                                      Log.i(TAG, "" + dateSelected);
                                                      closeKeyboard();
                                                  }
                                              }
@@ -59,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
            Log.i(TAG, "Trying to add: " + eventName + ", " + dateSelected);
+           Event newEvent = new Event(eventName, dateSelected, dateYear, dateMonth, dateDay);
+           eventNameET.setText(""); // clears out text
+           dbHelper.addEvent(newEvent);
         }
     }
 
@@ -76,4 +88,14 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    // add this method code to add to MainActivity.java
+
+    public void onRetrieve(View v){
+        Intent intent = new Intent(MainActivity.this, DisplayEventsActivity.class);
+        intent.putExtra("events", dbHelper.getEventsArrayList());
+        startActivity(intent);
+    }
+
+
 }
